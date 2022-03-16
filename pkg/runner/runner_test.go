@@ -42,6 +42,36 @@ func TestRun(t *testing.T) {
 		assert.Equal(t, result.Status, testkube.ExecutionStatusSuccess)
 		assert.Len(t, result.Steps, 1)
 	})
+
+	t.Run("run maven wrapper project tests", func(t *testing.T) {
+		// setup
+		tempDir, _ := os.MkdirTemp("", "*")
+		os.Setenv("RUNNER_DATADIR", tempDir)
+		repoDir := filepath.Join(tempDir, "repo")
+		os.Mkdir(repoDir, 0755)
+		_ = cp.Copy("../../examples/hello-mvnw", repoDir)
+
+		// given
+		runner := NewRunner()
+		execution := testkube.NewQueuedExecution()
+		execution.Content = &testkube.TestContent{
+			Type_: string(testkube.TestContentTypeGitDir),
+			Repository: &testkube.Repository{
+				Uri:    "https://github.com/lreimer/hands-on-maven.git",
+				Branch: "main",
+			},
+		}
+		execution.Args = []string{"test"}
+		execution.Envs = map[string]string{"TESTKUBE_MAVEN_WRAPPER": "true"}
+
+		// when
+		result, err := runner.Run(*execution)
+
+		// then
+		assert.NoError(t, err)
+		assert.Equal(t, result.Status, testkube.ExecutionStatusSuccess)
+		assert.Len(t, result.Steps, 1)
+	})
 }
 
 func TestRunErrors(t *testing.T) {
