@@ -2,7 +2,7 @@
 
 # Welcome to TestKube Maven Executor
 
-TestKube Gradle Executor is a test executor to run Gradle tasks with [TestKube](https://testkube.io).  
+TestKube Gradle Executor is a test executor to run Maven goals with [TestKube](https://testkube.io).  
 
 ## Usage
 
