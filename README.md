@@ -13,7 +13,7 @@ kubectl apply -f examples/maven-executor.yaml
 
 Issue the following commands to create and start a Maven test for a given Git repository:
 ```bash
-kubectl testkube tests create --git-uri https://github.com/lreimer/hands-on-maven.git --git-branch main --type "maven/test" --name maven-test
+kubectl testkube tests create --git-uri https://github.com/lreimer/hands-on-testkube.git --git-branch main --type "maven/test" --name maven-test
 kubectl testkube tests run --args test --watch maven-test
 ```
 

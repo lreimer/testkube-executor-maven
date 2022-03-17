@@ -27,7 +27,7 @@ func TestRun(t *testing.T) {
 		execution.Content = &testkube.TestContent{
 			Type_: string(testkube.TestContentTypeGitDir),
 			Repository: &testkube.Repository{
-				Uri:    "https://github.com/lreimer/hands-on-maven.git",
+				Uri:    "https://github.com/lreimer/hands-on-testkube.git",
 				Branch: "main",
 			},
 		}
@@ -57,7 +57,7 @@ func TestRun(t *testing.T) {
 		execution.Content = &testkube.TestContent{
 			Type_: string(testkube.TestContentTypeGitDir),
 			Repository: &testkube.Repository{
-				Uri:    "https://github.com/lreimer/hands-on-maven.git",
+				Uri:    "https://github.com/lreimer/hands-on-testkube.git",
 				Branch: "main",
 			},
 		}
@@ -121,7 +121,7 @@ func TestRunErrors(t *testing.T) {
 		execution.Content = &testkube.TestContent{
 			Type_: string(testkube.TestContentTypeGitDir),
 			Repository: &testkube.Repository{
-				Uri:    "https://github.com/lreimer/hands-on-maven.git",
+				Uri:    "https://github.com/lreimer/hands-on-testkube.git",
 				Branch: "main",
 			},
 		}
