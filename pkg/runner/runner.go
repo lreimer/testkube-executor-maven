@@ -72,6 +72,12 @@ func (r *MavenRunner) Run(execution testkube.Execution) (result testkube.Executi
 	args := []string{}
 	args = append(args, execution.Args...)
 
+	if !strings.EqualFold(execution.TestType, "maven/project") {
+		// then use the test subtype as goal or phase
+		goal := strings.Split(execution.TestType, "/")[1]
+		args = append(args, goal)
+	}
+
 	output.PrintEvent("Running", directory, mavenCommand, args)
 	output, err := executor.Run(directory, mavenCommand, args...)
 

@@ -13,7 +13,7 @@ import (
 
 func TestRun(t *testing.T) {
 
-	t.Run("run maven project tests", func(t *testing.T) {
+	t.Run("run maven project with test task and envs", func(t *testing.T) {
 		// setup
 		tempDir, _ := os.MkdirTemp("", "*")
 		os.Setenv("RUNNER_DATADIR", tempDir)
@@ -24,6 +24,7 @@ func TestRun(t *testing.T) {
 		// given
 		runner := NewRunner()
 		execution := testkube.NewQueuedExecution()
+		execution.TestType = "maven/project"
 		execution.Content = &testkube.TestContent{
 			Type_: string(testkube.TestContentTypeGitDir),
 			Repository: &testkube.Repository{
@@ -43,7 +44,7 @@ func TestRun(t *testing.T) {
 		assert.Len(t, result.Steps, 1)
 	})
 
-	t.Run("run maven wrapper project tests", func(t *testing.T) {
+	t.Run("run maven wrapper test goal with envs", func(t *testing.T) {
 		// setup
 		tempDir, _ := os.MkdirTemp("", "*")
 		os.Setenv("RUNNER_DATADIR", tempDir)
@@ -54,6 +55,7 @@ func TestRun(t *testing.T) {
 		// given
 		runner := NewRunner()
 		execution := testkube.NewQueuedExecution()
+		execution.TestType = "maven/test"
 		execution.Content = &testkube.TestContent{
 			Type_: string(testkube.TestContentTypeGitDir),
 			Repository: &testkube.Repository{
@@ -61,7 +63,6 @@ func TestRun(t *testing.T) {
 				Branch: "main",
 			},
 		}
-		execution.Args = []string{"test"}
 		execution.Envs = map[string]string{"TESTKUBE_MAVEN_WRAPPER": "true"}
 
 		// when
@@ -97,6 +98,7 @@ func TestRunErrors(t *testing.T) {
 		// given
 		runner := NewRunner()
 		execution := testkube.NewQueuedExecution()
+		execution.TestType = "maven/test"
 		execution.Content = testkube.NewStringTestContent("")
 
 		// when
@@ -118,6 +120,7 @@ func TestRunErrors(t *testing.T) {
 		// given
 		runner := NewRunner()
 		execution := testkube.NewQueuedExecution()
+		execution.TestType = "maven/test"
 		execution.Content = &testkube.TestContent{
 			Type_: string(testkube.TestContentTypeGitDir),
 			Repository: &testkube.Repository{
