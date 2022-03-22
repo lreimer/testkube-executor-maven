@@ -1,3 +1,5 @@
+:information_source: This repository has been archived on favour of the now official [TestKube Maven Executor](https://github.com/testkube/testkube-executor-maven)
+
 ![Testkube Logo](https://raw.githubusercontent.com/kubeshop/testkube/main/assets/testkube-color-gray.png)
 
 # Welcome to TestKube Maven Executor
